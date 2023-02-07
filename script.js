@@ -18,6 +18,77 @@ function operate(operator, num_1, num_2){
     return operator(num_1, num_2);
 };
 
+let clicked = false; 
+
+//DISPLAY
+//When the user presses a number(s), populate the display
+const display = document.getElementById('display');
+const button = document.querySelectorAll('.button');
+button.forEach(function(currentButton){
+    currentButton.addEventListener('click', () => {
+        display.innerHTML += currentButton.textContent; 
+        num_1 = Number(display.innerHTML); 
+        
+    })
+//});
+
+
+
+const operatorButton = document.querySelectorAll('.operator');
+const equals = document.querySelector('.equalSign'); 
+operatorButton.forEach(function(currentButton){
+    currentButton.addEventListener('click', () => {
+        clicked = false; 
+        if(clicked = false){
+            num_1 = Number(display.innerHTML);
+            console.log(num_1);
+            display.innerHTML = add(num_1, 0);
+            console.log(clicked);
+        }
+        //clicked = true; 
+        if(clicked = true){
+            console.log(clicked);
+            let operator = currentButton.id; 
+            console.log(operator);
+            num_2 = Number(display.innerHTML);
+            console.log(num_2);
+            //display.innerHTML = add(Number(display.innerHTML), num_2);
+            equals.addEventListener('click', () => {
+                if(operator === 'add'){
+                    display.innerHTML = add(num_1, num_2);
+                }
+            })
+        }
+
+        
+    })
+
+    
+
+})});
+
+const clear = document.querySelectorAll(".clear");
+clear.forEach(function(currentButton){
+    currentButton.addEventListener('click', () =>{
+        display.innerHTML = '';
+        return;     
+    })});
+
+
+
+
+
+
+
+//When the operator button is clicked, save the number in the display(num_1)
+
+
+
+/*const addition = document.getElementById('add');
+add.addEventListener('click', () => {
+    add(Number(display.innerHTML));
+})
+
 //When the user presses a number(s), populate the display
 const display = document.getElementById('display');
 const button = document.querySelectorAll('.button');
@@ -26,7 +97,7 @@ button.forEach(function(currentButton){
     currentButton.addEventListener('click', () => {
         display.innerHTML += currentButton.textContent; 
     })
-    return; 
+    return display.innerHTML; 
 });
 
 //When the user presses an operator button, save the number before it
@@ -53,7 +124,6 @@ operatorButton.forEach(function(currentButton){
                 console.log(num_2);
     });
     console.log(operate(operator, num_1, num_2));
-
 }})});*/
 
 
@@ -79,7 +149,7 @@ operation.forEach(function(currentOperation){
 
 
     //Create a div with the class name 'grid'
-    const grid = document.createElement('div');
-    grid.classList.add("grid");
+    //const grid = document.createElement('div');
+    //grid.classList.add("grid");
     //Make the 'grid' div a child of the 'container' div
     //container.appendChild(grid);
