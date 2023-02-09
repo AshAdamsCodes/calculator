@@ -18,7 +18,58 @@ function operate(operator, num_1, num_2){
     return operator(num_1, num_2);
 };
 
-let clicked = false; 
+
+//1. Press a number
+//2. Number appears in display
+const display = document.getElementById('display');
+const button = document.querySelectorAll('.button');
+
+function calc() {
+    button.forEach(function(currentButton){
+    currentButton.addEventListener('click', () => {
+        display.innerHTML += currentButton.textContent; 
+        num_1 = Number(display.innerHTML); 
+        
+        //3. Press an operator
+        //4. Number in display is saved and still displayed
+        //5. Operator is saved
+        const operatorButton = document.querySelectorAll('.operator');
+        operatorButton.forEach(function(currentButton){
+            currentButton.addEventListener('click', () => {
+                    console.log(num_1);
+                    let operator = currentButton.id; 
+                    console.log(operator);
+            })
+            //If operator exists, when you press another number
+            //the first number clears and the new number replaces it
+            currentButton.addEventListener('click', () => {
+              
+                    display.innerHTML = '';
+                
+                display.innerHTML += currentButton.textContent; 
+            }
+            )})
+    
+
+            //NET STEP FIX THE ABOVE
+            //MAKE IT SO THAT THE NUMBER IS STILL
+            //DISPLAYED WHEN THE OPERATOR BUTTON IS CLICKED
+            //NOW, WHEN THE OPERATOR IS CLICKED, THE NUMBER 
+            //DISAPPEARS AND THE OPERATOR IS DISPLAYED
+            //WE DON'T WANT THAT
+})
+
+
+})};
+
+
+calc();
+
+
+
+
+/*let clicked = false; 
+
 
 //DISPLAY
 //When the user presses a number(s), populate the display
@@ -42,7 +93,7 @@ operatorButton.forEach(function(currentButton){
         if(clicked = false){
             num_1 = Number(display.innerHTML);
             console.log(num_1);
-            display.innerHTML = add(num_1, 0);
+            //display.innerHTML = add(num_1, 0);
             console.log(clicked);
         }
         //clicked = true; 
@@ -79,7 +130,6 @@ clear.forEach(function(currentButton){
         display.innerHTML = '';
         return;     
     })});
-
 
 
 
