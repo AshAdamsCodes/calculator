@@ -1,7 +1,19 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  text-align: center;
+  font-size: large;
+
+}
+
+
 .container {
     /*background: black;*/
     display: inline-block;
     border: 5px solid black; 
+    width: 50%;
   }
 
   .grid .display{
@@ -17,10 +29,16 @@
     grid-gap: 10px;
     background-color: #2196F3;
     padding: 10px;
+    font-size: 32px;
   }
 
   .button button{
     cursor: pointer;
+    margin: 5px;
+  }
+  
+  button{
+    font-size: 32px;
   }
 
  

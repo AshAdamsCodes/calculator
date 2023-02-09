@@ -56,6 +56,12 @@ operatorButton.forEach(function(currentButton){
             equals.addEventListener('click', () => {
                 if(operator === 'add'){
                     display.innerHTML = add(num_1, num_2);
+                }else if(operator === 'subtract'){
+                    display.innerHTML = operate(subtract, num_2, num_1); //subtract(num_2, num_1);
+                }else if(operator === 'multiply'){
+                    display.innerHTML = operate(multiply, num_1, num_2); num//multiply(num_1, num_2);
+                }else if(operator === 'divide'){
+                    display.innerHTML = operate(divide, num_2, num_1);//divide(num_2, num_1);
                 }
             })
         }
@@ -88,7 +94,6 @@ clear.forEach(function(currentButton){
 add.addEventListener('click', () => {
     add(Number(display.innerHTML));
 })
-
 //When the user presses a number(s), populate the display
 const display = document.getElementById('display');
 const button = document.querySelectorAll('.button');
@@ -99,7 +104,6 @@ button.forEach(function(currentButton){
     })
     return display.innerHTML; 
 });
-
 //When the user presses an operator button, save the number before it
 let operator; 
 operatorButton.forEach(function(currentButton){
@@ -153,3 +157,4 @@ operation.forEach(function(currentOperation){
     //grid.classList.add("grid");
     //Make the 'grid' div a child of the 'container' div
     //container.appendChild(grid);
+
