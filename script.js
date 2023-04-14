@@ -19,117 +19,116 @@ function operate(operator, num_1, num_2){
 };
 
 
-//1. Press a number
-//2. Number appears in display
-const display = document.getElementById('display');
-const button = document.querySelectorAll('.button');
 
-function calc() {
-    button.forEach(function(currentButton){
-    currentButton.addEventListener('click', () => {
-        display.innerHTML += currentButton.textContent; 
-        num_1 = Number(display.innerHTML); 
-        
-        //3. Press an operator
-        //4. Number in display is saved and still displayed
-        //5. Operator is saved
-        const operatorButton = document.querySelectorAll('.operator');
-        operatorButton.forEach(function(currentButton){
-            currentButton.addEventListener('click', () => {
-                    console.log(num_1);
-                    let operator = currentButton.id; 
-                    console.log(operator);
-            })
-            //If operator exists, when you press another number
-            //the first number clears and the new number replaces it
-            currentButton.addEventListener('click', () => {
-              
-                    display.innerHTML = '';
-                
-                display.innerHTML += currentButton.textContent; 
-            }
-            )})
-    
-
-            //NET STEP FIX THE ABOVE
-            //MAKE IT SO THAT THE NUMBER IS STILL
-            //DISPLAYED WHEN THE OPERATOR BUTTON IS CLICKED
-            //NOW, WHEN THE OPERATOR IS CLICKED, THE NUMBER 
-            //DISAPPEARS AND THE OPERATOR IS DISPLAYED
-            //WE DON'T WANT THAT
-})
-
-
-})};
-
-
-calc();
-
-
-
-
-/*let clicked = false; 
-
+currentOperator = null; 
 
 //DISPLAY
-//When the user presses a number(s), populate the display
-const display = document.getElementById('display');
+//When the user presses a number button(s), populate the display
 const button = document.querySelectorAll('.button');
+const display = document.getElementById('display');
+
+//set shouldClear to true
+let shouldClear = true;
+
+//if shouldClear is true, display = button.id
+//set shouldClear to false
+//else if shouldClear is false, display += display.id
+
+
 button.forEach(function(currentButton){
     currentButton.addEventListener('click', () => {
-        display.innerHTML += currentButton.textContent; 
-        num_1 = Number(display.innerHTML); 
-        
+        if(shouldClear === true){
+            display.innerHTML = currentButton.id;
+            shouldClear = false; 
+        }else if(shouldClear === false){
+            display.innerHTML += currentButton.id;  
+        }
     })
-//});
+});
 
 
-
+//OPERATORS
 const operatorButton = document.querySelectorAll('.operator');
 const equals = document.querySelector('.equalSign'); 
-operatorButton.forEach(function(currentButton){
-    currentButton.addEventListener('click', () => {
-        clicked = false; 
-        if(clicked = false){
-            num_1 = Number(display.innerHTML);
-            console.log(num_1);
-            //display.innerHTML = add(num_1, 0);
-            console.log(clicked);
-        }
-        //clicked = true; 
-        if(clicked = true){
-            console.log(clicked);
-            let operator = currentButton.id; 
-            console.log(operator);
-            num_2 = Number(display.innerHTML);
-            console.log(num_2);
-            //display.innerHTML = add(Number(display.innerHTML), num_2);
-            equals.addEventListener('click', () => {
-                if(operator === 'add'){
-                    display.innerHTML = add(num_1, num_2);
-                }else if(operator === 'subtract'){
-                    display.innerHTML = operate(subtract, num_2, num_1); //subtract(num_2, num_1);
-                }else if(operator === 'multiply'){
-                    display.innerHTML = operate(multiply, num_1, num_2); num//multiply(num_1, num_2);
-                }else if(operator === 'divide'){
-                    display.innerHTML = operate(divide, num_2, num_1);//divide(num_2, num_1);
-                }
-            })
-        }
 
-        
-    })
+    //Set num_1 and num_2 to undefined 
+    num_1 = undefined; 
+    num_2 = undefined;
 
     
+    //clear = true
+    operatorButton.forEach(function(currentButton){
+        currentButton.addEventListener('click', () => {
+            //When you press an operator, check if num_1 exists
+            //if num_1 doesn't exist, make num_1 equal display.innerhtml
+            if(!num_1){
+               num_1 = Number(display.innerHTML);
+            //else if, it's not undefined (it exists), 
+            //displayinnerhtml = add(num_1, dispalyinnerhtml)
+            //set num_1 = display.innerhtml 
+            }else{
+                display.innerHTML = add(num_1, Number(display.innerHTML));
+                num_1 = Number(display.innerHTML);
+            }
+            //Make shouldClear true again
+            shouldClear = true;
+            
+            //Save the last operator that was selected
+            operator = currentButton.id; 
+               
+        }
+        )
+    });
 
-})});
+
+
+
+
+
+
+    //EQUALS 
+    //set num_2 to display.innerHTML
+    //clear = true; 
+
+    equals.addEventListener('click', () => {
+    num_2 = Number(display.innerHTML);
+    if(operator === 'add'){
+        //console.log(`test`)
+        display.innerHTML = add(num_1, num_2);
+        //numArray.push(Number(display.innerHTML));
+        /*for(let i = 0 ; i < numArray.length ; i++){
+            numArray[i] = Number(display.innerHTML);
+            if(numArray[i] === numArray[i + 1]){
+                numArray.pop();
+                //num_1 = numArray[0];
+            }
+        }*/
+        // num_1 = undefined; 
+        // num_2 = undefined; 
+    }else if (operator === 'subtract'){
+        display.innerHTML = subtract(num_1, num_2);
+    }else if (operator === 'multiply'){
+        display.innerHTML = multiply(num_1, num_2)
+    }
+        num_1 = undefined; 
+        num_2 = undefined; 
+        shouldClear = true;
+})
+
+const addition = document.getElementById('add');
+console.log(operatorButton.length)
+
+
 
 const clear = document.querySelectorAll(".clear");
 clear.forEach(function(currentButton){
-    currentButton.addEventListener('click', () =>{
-        display.innerHTML = '';
-        return;     
-    })});
+currentButton.addEventListener('click', () =>{
+         display.innerHTML = '';
+        shouldClear = true;
+        num_1 = undefined;
+//         //return;     
+     })});
+
 
 
 
@@ -144,6 +143,7 @@ clear.forEach(function(currentButton){
 add.addEventListener('click', () => {
     add(Number(display.innerHTML));
 })
+
 //When the user presses a number(s), populate the display
 const display = document.getElementById('display');
 const button = document.querySelectorAll('.button');
@@ -154,6 +154,7 @@ button.forEach(function(currentButton){
     })
     return display.innerHTML; 
 });
+
 //When the user presses an operator button, save the number before it
 let operator; 
 operatorButton.forEach(function(currentButton){
@@ -208,3 +209,24 @@ operation.forEach(function(currentOperation){
     //Make the 'grid' div a child of the 'container' div
     //container.appendChild(grid);
 
+
+
+    //IDEAS
+    //set num_1 to undefined 
+    //when you press an operator, check if num_1 exists
+    //if num_1 doesn't exist, make num_1 equal display.innerhtml
+    //else if, it's not undefined (it exists), displayinnerhtml = add(num_1, dispalyinnerhtml), num_1 = display.innerhtml 
+    //clear = true
+    //make all of these seperate to their operator
+
+
+
+    //set clear to true
+    //if clear is true, display = button.id and set clear to false
+    //else if clear is true, display += display.id
+
+
+    //eequals 
+    //display.innerhtml = add(num 1, display.innerhtml)
+    //num 1 os imderfomed 
+    //clear = true; 
