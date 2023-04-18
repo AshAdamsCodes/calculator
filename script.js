@@ -20,7 +20,7 @@ function operate(operator, num_1, num_2){
 
 
 
-currentOperator = null; 
+let operator = undefined; 
 
 //DISPLAY
 //When the user presses a number button(s), populate the display
@@ -59,6 +59,7 @@ const equals = document.querySelector('.equalSign');
     //clear = true
     operatorButton.forEach(function(currentButton){
         currentButton.addEventListener('click', () => {
+            //operator = currentButton.id; 
             //When you press an operator, check if num_1 exists
             //if num_1 doesn't exist, make num_1 equal display.innerhtml
             if(!num_1){
@@ -66,8 +67,17 @@ const equals = document.querySelector('.equalSign');
             //else if, it's not undefined (it exists), 
             //displayinnerhtml = add(num_1, dispalyinnerhtml)
             //set num_1 = display.innerhtml 
-            }else{
+            }else if(operator === 'add'){
                 display.innerHTML = add(num_1, Number(display.innerHTML));
+                num_1 = Number(display.innerHTML);
+            }else if(operator === 'subtract'){
+                display.innerHTML = subtract(num_1, Number(display.innerHTML));
+                num_1 = Number(display.innerHTML);
+            }else if(operator === 'multiply'){
+                display.innerHTML = multiply(num_1, Number(display.innerHTML));
+                num_1 = Number(display.innerHTML);
+            }else if(operator === 'divide'){
+                display.innerHTML = divide(num_1, Number(display.innerHTML));
                 num_1 = Number(display.innerHTML);
             }
             //Make shouldClear true again
@@ -75,6 +85,7 @@ const equals = document.querySelector('.equalSign');
             
             //Save the last operator that was selected
             operator = currentButton.id; 
+
                
         }
         )
@@ -102,13 +113,15 @@ const equals = document.querySelector('.equalSign');
                 numArray.pop();
                 //num_1 = numArray[0];
             }
-        }*/
+        }
         // num_1 = undefined; 
-        // num_2 = undefined; 
+        // num_2 = undefined; */
     }else if (operator === 'subtract'){
         display.innerHTML = subtract(num_1, num_2);
     }else if (operator === 'multiply'){
-        display.innerHTML = multiply(num_1, num_2)
+        display.innerHTML = multiply(num_1, num_)
+    }else if (operator === 'divide'){
+        display.innerHTML = divide(num_1, num_2);
     }
         num_1 = undefined; 
         num_2 = undefined; 
