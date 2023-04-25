@@ -29,6 +29,7 @@ const display = document.getElementById('display');
 
 //set shouldClear to true
 let shouldClear = true;
+let shouldOperate = false;
 
 //if shouldClear is true, display = button.id
 //set shouldClear to false
@@ -37,6 +38,7 @@ let shouldClear = true;
 
 button.forEach(function(currentButton){
     currentButton.addEventListener('click', () => {
+        shouldOperate = true;
         if(shouldClear === true){
             display.innerHTML = currentButton.id;
             shouldClear = false; 
@@ -67,22 +69,24 @@ const equals = document.querySelector('.equalSign');
             //else if, it's not undefined (it exists), 
             //displayinnerhtml = add(num_1, dispalyinnerhtml)
             //set num_1 = display.innerhtml 
-            }else if(operator === 'add'){
-                display.innerHTML = add(num_1, Number(display.innerHTML));
-                num_1 = Number(display.innerHTML);
-            }else if(operator === 'subtract'){
-                display.innerHTML = subtract(num_1, Number(display.innerHTML));
-                num_1 = Number(display.innerHTML);
-            }else if(operator === 'multiply'){
-                display.innerHTML = multiply(num_1, Number(display.innerHTML));
-                num_1 = Number(display.innerHTML);
-            }else if(operator === 'divide'){
-                display.innerHTML = divide(num_1, Number(display.innerHTML));
-                num_1 = Number(display.innerHTML);
+            }else if(shouldOperate) {
+                if(operator === 'add'){
+                    display.innerHTML = add(num_1, Number(display.innerHTML));
+                    num_1 = Number(display.innerHTML);
+                }else if(operator === 'subtract'){
+                    display.innerHTML = subtract(num_1, Number(display.innerHTML));
+                    num_1 = Number(display.innerHTML);
+                }else if(operator === 'multiply'){
+                    display.innerHTML = multiply(num_1, Number(display.innerHTML));
+                    num_1 = Number(display.innerHTML);
+                }else if(operator === 'divide'){
+                    display.innerHTML = divide(num_1, Number(display.innerHTML));
+                    num_1 = Number(display.innerHTML);
+                }
             }
             //Make shouldClear true again
             shouldClear = true;
-            
+            shouldOperate = false;
             //Save the last operator that was selected
             operator = currentButton.id; 
 
